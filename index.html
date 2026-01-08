@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YouTube</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <button class="menu-btn" id="menuBtn">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <img src="./yt logo.png" class="youtube-logo">
+    </div>
+
+    <div class="header-center">
+        <div class="search-container">
+            <form class="search-form">
+                <input class="search-input" placeholder="Search">
+                <button class="search-btn">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </form>
+            <button class="voice-btn">
+                <span class="material-symbols-outlined">mic</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="header-right">
+        <button class="icon-btn">
+            <span class="material-symbols-outlined">video_call</span>
+        </button>
+        <button class="icon-btn">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <img src="./profile pic.png" class="avatar" style="width:32px;height:32px;border-radius:50%">
+    </div>
+</header>
+
+<div class="main-container">
+    <aside class="sidebar" id="sidebar">
+        <a class="sidebar-item active">
+            <span class="material-symbols-outlined">home</span>
+            <span class="sidebar-text">Home</span>
+        </a>
+        <a class="sidebar-item">
+            <span class="material-symbols-outlined">subscriptions</span>
+            <span class="sidebar-text">Subscriptions</span>
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <div class="chips-container">
+            <button class="chip active">All</button>
+            <button class="chip">Music</button>
+            <button class="chip">Gaming</button>
+            <button class="chip">News</button>
+        </div>
+
+        <div class="video-grid">
+    <div class="video-card">
+        <div class="thumbnail-container">
+            <img src="./thumbnail_1.png" alt="Web App Tutorial">
+        </div>
+        <div class="video-info">
+            <div>
+                <h3 class="video-title">Build a Full Web App from Scratch (2026)</h3>
+                <a href="#" class="channel-name">TechMaster</a>
+                <div class="video-meta">2.1M views • 2 days ago</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-card">
+            <div class="thumbnail-container">
+            <img src="./thumbnail_2.png" alt="VS Code Tips">
+        </div>
+        <div class="video-info">
+            <div>
+                <h3 class="video-title">Top VS Code Extensions for Developers</h3>
+                <a href="#" class="channel-name">Code Daily</a>
+                <div class="video-meta">980K views • 1 week ago</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-card">
+        <div class="thumbnail-container">
+            <img src="./thumbnail_3.png" alt="Gaming Live">
+        </div>
+        <div class="video-info">
+            <div>
+                <h3 class="video-title">🔴 Live Gaming Session – Join Now!</h3>
+                <a href="#" class="channel-name">GameZone</a>
+                <div class="video-meta">15K watching • Live</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-card">
+        <div class="thumbnail-container">
+            <img src="./thumbnail_4.png" alt="Startup Story">
+        </div>
+        <div class="video-info">
+            <div>
+                <h3 class="video-title">How I Built a Startup from Zero</h3>
+                <a href="#" class="channel-name">Startup Talks</a>
+                <div class="video-meta">4.8M views • 3 weeks ago</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-card">
+        <div class="thumbnail-container">
+            <img src="./thumbnail_5.png" alt="CSS Tricks">
+        </div>
+        <div class="video-info">
+            <div>
+                <h3 class="video-title">10 CSS Tricks You Should Know</h3>
+                <a href="#" class="channel-name">CSS Wizard</a>
+                <div class="video-meta">1.6M views • 5 days ago</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-card">
+        <div class="thumbnail-container">
+            <img src="./thumbnail_6.png" alt="JavaScript Course">
+        </div>
+        <div class="video-info">
+            <div>
+                <h3 class="video-title">JavaScript Full Course for Beginners</h3>
+                <a href="#" class="channel-name">FreeCodeCamp</a>
+                <div class="video-meta">12M views • 1 month ago</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="thumbnail-container">
+                    <img src="./thumbnail_1.png">
+                </div>
+                <div class="video-info">
+                    <div>
+                        <h3 class="video-title">Building a Full Web App</h3>
+                        <div class="video-meta">2M views • 2 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+menuBtn.onclick = () => sidebar.classList.toggle("collapsed");
+document.querySelectorAll(".chip").forEach(c =>
+    c.onclick = () => {
+        document.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+        c.classList.add("active");
+    }
+);
+</script>
+
+</body>
+</html>
+
+
+
