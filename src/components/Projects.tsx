@@ -118,9 +118,15 @@ const Projects = () => {
                 {/* Links */}
                 <div className="flex items-center gap-4">
                   {project.isClient ? (
-                    <Button variant="outline" size="sm" onClick={() => window.open(project.links.demo, '_blank')}>
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Visit Client Website
+                    <Button asChild variant="outline" size="sm">
+                      <a
+                        href={project.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Visit Client Website
+                      </a>
                     </Button>
                   ) : (
                     <>
