@@ -1,11 +1,9 @@
 import { Handler } from "@netlify/functions";
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const RATE_LIMIT = new Map<string, number>();
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 const systemPrompt = `
 You are Krushna Rajendra Hangargekar's AI assistant. Respond professionally and helpfully based on this info:
@@ -83,16 +81,11 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    const result = await anthropic.messages.create({
-      model: "claude-3-5-haiku-latest",
-      max_tokens: 1024,
-      system: systemPrompt,
-      messages: [
-        { role: "user", content: message }
-      ]
-    });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
 
-    const text = result.content[0].type === 'text' ? result.content[0].text : '';
+    const result = await model.generateContent([systemPrompt, message]);
+
+    const text = result.response.text();
 
     if (!text) {
       return {
