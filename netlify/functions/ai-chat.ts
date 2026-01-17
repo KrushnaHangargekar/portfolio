@@ -1,11 +1,25 @@
 import { Handler } from "@netlify/functions";
 import Anthropic from "@anthropic-ai/sdk";
 
+const RATE_LIMIT = new Map<string, number>();
+
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
 });
 
 export const handler: Handler = async (event) => {
+  const ip = event.headers["x-forwarded-for"] || "unknown";
+  const now = Date.now();
+
+  if (RATE_LIMIT.has(ip) && (now - (RATE_LIMIT.get(ip) || 0)) < 5000) {
+    return {
+      statusCode: 429,
+      body: "Too many requests. Slow down.",
+    };
+  }
+
+  RATE_LIMIT.set(ip, now);
+
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
