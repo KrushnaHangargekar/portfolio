@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Bot, Brain, Globe, Database } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ExternalLinkLoader from "./ExternalLinkLoader";
 
 const projects = [
   {
@@ -48,8 +50,26 @@ const projects = [
 ];
 
 const Projects = () => {
+  const [loaderState, setLoaderState] = useState<{ isOpen: boolean; url: string }>({
+    isOpen: false,
+    url: ""
+  });
+
+  const handleExternalLinkClick = (url: string) => {
+    setLoaderState({ isOpen: true, url });
+  };
+
+  const handleLoaderComplete = () => {
+    setLoaderState({ isOpen: false, url: "" });
+  };
+
   return (
     <section id="projects" className="py-24 px-6">
+      <ExternalLinkLoader
+        isOpen={loaderState.isOpen}
+        url={loaderState.url}
+        onComplete={handleLoaderComplete}
+      />
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <motion.div
@@ -118,39 +138,34 @@ const Projects = () => {
                 {/* Links */}
                 <div className="flex items-center gap-4">
                   {project.isClient ? (
-                    <Button asChild variant="outline" size="sm">
-                      <a
-                        href={project.links.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Visit Client Website
-                      </a>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleExternalLinkClick(project.links.demo)}
+                      className="cursor-pointer"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Visit Client Website
                     </Button>
                   ) : (
                     <>
                       {project.links.demo !== "#" && (
-                        <a
-                          href={project.links.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        <button
+                          onClick={() => handleExternalLinkClick(project.links.demo)}
+                          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                         >
                           <ExternalLink className="w-4 h-4" />
                           <span>Live Demo</span>
-                        </a>
+                        </button>
                       )}
                       {project.links.github && project.links.github !== "#" && (
-                        <a
-                          href={project.links.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        <button
+                          onClick={() => handleExternalLinkClick(project.links.github!)}
+                          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                         >
                           <Github className="w-4 h-4" />
                           <span>Source</span>
-                        </a>
+                        </button>
                       )}
                     </>
                   )}
