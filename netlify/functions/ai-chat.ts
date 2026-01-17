@@ -84,7 +84,7 @@ export const handler: Handler = async (event) => {
     }
 
     const result = await anthropic.messages.create({
-      model: "claude-3-5-haiku-20241022",
+      model: "claude-3-5-haiku-latest",
       max_tokens: 1024,
       system: systemPrompt,
       messages: [
