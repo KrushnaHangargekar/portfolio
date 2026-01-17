@@ -2,6 +2,13 @@ import { motion } from "framer-motion";
 import { ChevronDown, Sparkles } from "lucide-react";
 
 const Hero = () => {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
@@ -130,22 +137,22 @@ const Hero = () => {
           transition={{ delay: 1.2 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="#projects"
+          <button
+            onClick={() => scrollToSection("projects")}
             className="group relative px-8 py-4 rounded-xl font-semibold overflow-hidden transition-transform hover:scale-105"
           >
             <div className="absolute inset-0 rounded-xl" style={{ background: "var(--gradient-primary)" }} />
             <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" 
                  style={{ background: "var(--gradient-hero)" }} />
             <span className="relative text-white">View My Work</span>
-          </a>
+          </button>
           
-          <a
-            href="#contact"
+          <button
+            onClick={() => scrollToSection("contact")}
             className="px-8 py-4 rounded-xl font-semibold glass hover:bg-secondary/50 transition-all hover:scale-105"
           >
             Get In Touch
-          </a>
+          </button>
         </motion.div>
       </div>
 
@@ -156,15 +163,15 @@ const Hero = () => {
         transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <motion.a
-          href="#projects"
+        <motion.button
+          onClick={() => scrollToSection("projects")}
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <span className="text-sm">Scroll to explore</span>
           <ChevronDown className="w-5 h-5" />
-        </motion.a>
+        </motion.button>
       </motion.div>
     </section>
   );

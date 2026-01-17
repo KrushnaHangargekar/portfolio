@@ -27,13 +27,16 @@ const Footer = () => {
           </div>
 
           {/* Back to top */}
-          <motion.a
-            href="#home"
+          <motion.button
+            onClick={() => {
+              const element = document.getElementById('home');
+              if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }}
             whileHover={{ scale: 1.05 }}
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Back to top ↑
-          </motion.a>
+          </motion.button>
         </motion.div>
       </div>
     </footer>
