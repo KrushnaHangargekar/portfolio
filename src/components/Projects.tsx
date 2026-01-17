@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Bot, Brain, Globe, Database } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const projects = [
   {
@@ -10,7 +11,8 @@ const projects = [
     icon: Globe,
     color: "from-blue-500 to-purple-500",
     size: "large",
-    links: { demo: "https://amazonbrand.in/Nalgirkar", github: null }
+    links: { demo: "https://amazonbrand.in/Nalgirkar", github: null },
+    isClient: true
   },
   {
     id: 2,
@@ -20,7 +22,8 @@ const projects = [
     icon: Globe,
     color: "from-purple-500 to-pink-500",
     size: "large",
-    links: { demo: "https://amazonbrand.in/TechMantra", github: null }
+    links: { demo: "https://amazonbrand.in/TechMantra", github: null },
+    isClient: true
   },
   {
     id: 3,
@@ -114,25 +117,42 @@ const Projects = () => {
 
                 {/* Links */}
                 <div className="flex items-center gap-4">
-                  <a
-                    href={project.links.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Live Demo</span>
-                  </a>
-                  {project.links.github && project.links.github !== "#" && (
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <Github className="w-4 h-4" />
-                      <span>Source</span>
-                    </a>
+                  {project.isClient ? (
+                    <Button asChild variant="outline" size="sm">
+                      <a
+                        href={project.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Visit Client Website
+                      </a>
+                    </Button>
+                  ) : (
+                    <>
+                      {project.links.demo !== "#" && (
+                        <a
+                          href={project.links.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          <span>Live Demo</span>
+                        </a>
+                      )}
+                      {project.links.github && project.links.github !== "#" && (
+                        <a
+                          href={project.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          <Github className="w-4 h-4" />
+                          <span>Source</span>
+                        </a>
+                      )}
+                    </>
                   )}
                 </div>
 

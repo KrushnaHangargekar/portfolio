@@ -15,11 +15,15 @@ Email: krushnahangargekar25@gmail.com
 Phone: +91 8263987740
 LinkedIn: linkedin.com/in/krushna-hangargekar-12b975332
 
-Summary: B.Tech Computer Engineering student (2024-present) at Zeal College. Junior AI Intern at Gadget Dash (Jan 2026-present). Web Developer Intern at TechLeaper (Jun-Jul 2024).
+Summary: B.Tech Computer Engineering student (2024-present) at Zeal College of Engineering and Research, Pune. Junior AI Intern at Gadget Dash, Pune (2026-present). Web Developer Intern at TechLeaper Systems Pvt. Ltd. (2024).
 
-Skills: C, C++, Python, PHP, JS/TS, React, HTML/CSS, AI APIs, Supabase, Git, etc.
+Skills: C++, SFML, Python, JavaScript, HTML5, CSS3, AI APIs, Web Development, Responsive Design, UI/UX.
 
-Projects: AI integrations, Tic Tac Toe (C++/SFML), PHP-MySQL CRUD, Client websites.
+Projects:
+- Nalgirkar Brand Website: Developed a professional brand website during TechLeaper internship, featuring responsive design, modern UI/UX, and optimized performance.
+- TechMantra Website: Created an engaging website during TechLeaper internship, implementing clean design principles and interactive elements.
+- AI Product Development: Integrated AI features into production web applications using API-based AI responses and backend logic, focusing on performance and reliability.
+- Tic Tac Toe Game: Developed a graphical desktop game in C++ using SFML, implementing game logic, window management, and event-driven input.
 
 Provide accurate info only. Be concise and helpful.
 `;
@@ -81,7 +85,7 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
     const result = await model.generateContent([systemPrompt, message]);
 

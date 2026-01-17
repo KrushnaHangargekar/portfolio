@@ -31,15 +31,17 @@ const AIAssistant = () => {
       });
 
       if (!res.ok) {
-        throw new Error("AI failed");
+        const errorData = await res.json();
+        throw new Error(errorData.error || "AI failed");
       }
 
       const data = await res.json();
       setMessages((prev) => [...prev, { id: Date.now(), text: data.reply || "Sorry, I couldn't process that.", isBot: true }]);
     } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "AI is temporarily unavailable.";
       setMessages(prev => [
         ...prev,
-        { id: Date.now(), text: "AI is temporarily unavailable.", isBot: true }
+        { id: Date.now(), text: errorMessage, isBot: true }
       ]);
     }
   };
