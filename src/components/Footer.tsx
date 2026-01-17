@@ -14,7 +14,7 @@ const Footer = () => {
           {/* Logo/Name */}
           <div className="flex items-center gap-2">
             <span className="text-xl font-bold gradient-text">KH</span>
-            <span className="text-muted-foreground">Krushna Hangargekar</span>
+            <span className="text-muted-foreground">Krushna Rajendra Hangargekar</span>
           </div>
 
           {/* Copyright */}

@@ -1,6 +1,6 @@
 import { Handler } from "@netlify/functions";
 import { createClient } from "@supabase/supabase-js";
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 const supabaseUrl = process.env.SUPABASE_URL || "https://wpoqhnmmppkgtroiitmz.supabase.co";
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -11,15 +11,7 @@ if (!supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey || "");
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface ContactFormData {
   name: string;
@@ -80,33 +72,31 @@ const handler: Handler = async (event) => {
       };
     }
 
-    // Optional: Insert into Supabase
-    try {
-      const { data, error } = await supabase.from("contacts").insert([
-        {
-          name,
-          email,
-          message,
-          created_at: new Date().toISOString(),
-        },
-      ]);
-      if (error) throw error;
-    } catch (supabaseError) {
-      console.error("Supabase error:", supabaseError);
-    }
+    // Optional: Insert into Supabase (non-blocking)
+    supabase.from("contacts").insert([
+      {
+        name,
+        email,
+        message,
+        created_at: new Date().toISOString(),
+      },
+    ]).then(({ data, error }) => {
+      if (error) console.error("Supabase error:", error);
+      else console.log("Supabase insert success:", data);
+    });
 
-    // Send email notification
-    try {
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: 'krushnahangargekar25@gmail.com',
-        subject: 'New Contact Form Submission',
-        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-        replyTo: email,
-      });
-    } catch (emailError) {
+    // Send email notification (non-blocking)
+    resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: 'krushnahangargekar25@gmail.com',
+      subject: 'New Contact Form Submission',
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      replyTo: email,
+    }).then(() => {
+      console.log("Email sent successfully");
+    }).catch((emailError) => {
       console.error('Failed to send email:', emailError);
-    }
+    });
 
     return {
       statusCode: 200,

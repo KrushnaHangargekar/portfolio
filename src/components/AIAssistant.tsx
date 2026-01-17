@@ -24,19 +24,23 @@ const AIAssistant = () => {
     setInput("");
 
     try {
-      // Fetch bot response
       const res = await fetch("/.netlify/functions/ai-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),
       });
 
-      if (!res.ok) throw new Error('Failed to fetch');
+      if (!res.ok) {
+        throw new Error("AI failed");
+      }
 
       const data = await res.json();
       setMessages((prev) => [...prev, { id: Date.now(), text: data.reply || "Sorry, I couldn't process that.", isBot: true }]);
-    } catch (error) {
-      setMessages((prev) => [...prev, { id: Date.now(), text: "Oops, something went wrong. Please try again.", isBot: true }]);
+    } catch (err) {
+      setMessages(prev => [
+        ...prev,
+        { id: Date.now(), text: "AI is temporarily unavailable.", isBot: true }
+      ]);
     }
   };
 

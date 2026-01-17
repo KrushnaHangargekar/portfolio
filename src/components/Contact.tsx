@@ -3,16 +3,14 @@ import { Mail, Phone, MapPin, Linkedin, Github, Twitter, Send } from "lucide-rea
 import { useState } from "react";
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "krushna.dev@email.com", href: "mailto:krushna.dev@email.com" },
-  { icon: Phone, label: "Phone", value: "+91 98765 43210", href: "tel:+919876543210" },
+  { icon: Mail, label: "Email", value: "krushnahangargekar25@gmail.com", href: "mailto:krushnahangargekar25@gmail.com" },
+  { icon: Phone, label: "Phone", value: "+91 8263987740", href: "tel:+918263987740" },
   { icon: MapPin, label: "Location", value: "Pune, Maharashtra, India", href: "#" },
-  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/krushna", href: "https://linkedin.com" },
+  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/krushna-hangargekar-12b975332", href: "https://www.linkedin.com/in/krushna-hangargekar-12b975332" },
 ];
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/krushna-hangargekar-12b975332", label: "LinkedIn" },
 ];
 
 const Contact = () => {

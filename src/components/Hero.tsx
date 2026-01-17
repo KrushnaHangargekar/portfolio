@@ -104,7 +104,7 @@ const Hero = () => {
         >
           <Sparkles className="w-5 h-5 text-primary animate-pulse-glow" />
           <span className="text-xl md:text-2xl text-muted-foreground font-medium">
-            AI Developer & Computer Engineer
+            AI Developer | Computer Engineering Undergraduate | Full-Stack Web Developer
           </span>
           <Sparkles className="w-5 h-5 text-accent animate-pulse-glow" />
         </motion.div>
@@ -114,11 +114,13 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
-          className="max-w-2xl mx-auto text-lg text-muted-foreground mb-12"
+          className="max-w-3xl mx-auto text-lg text-muted-foreground mb-12"
         >
-          Building intelligent systems and crafting elegant solutions at the intersection of 
-          <span className="text-primary"> artificial intelligence</span> and 
-          <span className="text-accent"> modern web development</span>.
+          I am a Computer Engineering undergraduate with hands-on experience in AI integration,
+          full-stack web development, and modern UI design. Currently working as a Junior AI Intern,
+          I specialize in building real-world web applications using React, TypeScript, Python, APIs,
+          and serverless architectures. I am passionate about AI-powered products, scalable systems,
+          and clean user-centric design.
         </motion.p>
 
         {/* CTA Buttons */}
