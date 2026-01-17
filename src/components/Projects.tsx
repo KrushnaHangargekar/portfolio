@@ -4,42 +4,42 @@ import { ExternalLink, Github, Bot, Brain, Globe, Database } from "lucide-react"
 const projects = [
   {
     id: 1,
+    title: "Nalgirkar Brand Website",
+    description: "Developed a professional brand website for Nalgirkar during TechLeaper internship, featuring responsive design, modern UI/UX, and optimized performance.",
+    tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    icon: Globe,
+    color: "from-blue-500 to-purple-500",
+    size: "large",
+    links: { demo: "https://amazonbrand.in/Nalgirkar", github: null }
+  },
+  {
+    id: 2,
+    title: "TechMantra Website",
+    description: "Created an engaging website for TechMantra during TechLeaper internship, implementing clean design principles and interactive elements.",
+    tags: ["HTML5", "CSS3", "JavaScript", "UI/UX"],
+    icon: Globe,
+    color: "from-purple-500 to-pink-500",
+    size: "large",
+    links: { demo: "https://amazonbrand.in/TechMantra", github: null }
+  },
+  {
+    id: 3,
     title: "AI Product Development",
     description: "Integrated AI features into production web applications using API-based AI responses and backend logic, focusing on performance and reliability.",
     tags: ["Python", "APIs", "Web Integration"],
     icon: Bot,
-    color: "from-purple-500 to-pink-500",
-    size: "large",
-    links: { demo: "#", github: "#" }
-  },
-  {
-    id: 2,
-    title: "Tic Tac Toe Game",
-    description: "Developed a graphical desktop game implementing game logic, window management, and event-driven input.",
-    tags: ["C++", "SFML"],
-    icon: Database,
-    color: "from-blue-500 to-cyan-500",
-    size: "medium",
-    links: { demo: "#", github: "#" }
-  },
-  {
-    id: 3,
-    title: "PHP–MySQL CRUD Web Application",
-    description: "Built a database-driven web application implementing full CRUD operations with backend logic and database integration.",
-    tags: ["PHP", "MySQL"],
-    icon: Database,
-    color: "from-pink-500 to-orange-500",
+    color: "from-green-500 to-blue-500",
     size: "medium",
     links: { demo: "#", github: "#" }
   },
   {
     id: 4,
-    title: "UI Design & Client Websites",
-    description: "Designed and delivered responsive, modern websites for real clients during internship with focus on usability and clean UI.",
-    tags: ["HTML5", "CSS3", "Responsive Design"],
-    icon: Globe,
-    color: "from-cyan-500 to-green-500",
-    size: "large",
+    title: "Tic Tac Toe Game",
+    description: "Developed a graphical desktop game implementing game logic, window management, and event-driven input.",
+    tags: ["C++", "SFML"],
+    icon: Database,
+    color: "from-orange-500 to-red-500",
+    size: "medium",
     links: { demo: "#", github: "#" }
   },
 ];
@@ -116,18 +116,24 @@ const Projects = () => {
                 <div className="flex items-center gap-4">
                   <a
                     href={project.links.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>Live Demo</span>
                   </a>
-                  <a
-                    href={project.links.github}
-                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                    <span>Source</span>
-                  </a>
+                  {project.links.github && project.links.github !== "#" && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span>Source</span>
+                    </a>
+                  )}
                 </div>
 
                 {/* Corner decoration */}
