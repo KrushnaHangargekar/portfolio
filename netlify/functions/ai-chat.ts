@@ -1,9 +1,11 @@
 import { Handler } from "@netlify/functions";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Anthropic from "@anthropic-ai/sdk";
 
 const RATE_LIMIT = new Map<string, number>();
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY || "AIzaSyDoptg5glfOrDQdTZW678oruaAt9Zxo15M");
+const anthropic = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY
+});
 
 const systemPrompt = `
 You are Krushna Rajendra Hangargekar's AI assistant. Respond professionally and helpfully based on this info:
@@ -23,11 +25,6 @@ Projects: AI integrations, Tic Tac Toe (C++/SFML), PHP-MySQL CRUD, Client websit
 
 Provide accurate info only. Be concise and helpful.
 `;
-
-const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
-  systemInstruction: systemPrompt,
-});
 
 export const handler: Handler = async (event) => {
   const ip = event.headers["x-forwarded-for"] || "unknown";
@@ -86,10 +83,16 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    const result = await model.generateContent(message);
+    const result = await anthropic.messages.create({
+      model: "claude-3-haiku-20240307",
+      max_tokens: 1024,
+      system: systemPrompt,
+      messages: [
+        { role: "user", content: message }
+      ]
+    });
 
-    const response = result.response;
-    const text = response.text();
+    const text = result.content[0].type === 'text' ? result.content[0].text : '';
 
     if (!text) {
       return {
